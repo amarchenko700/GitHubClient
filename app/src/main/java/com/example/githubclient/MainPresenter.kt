@@ -1,11 +1,21 @@
 package com.example.githubclient
 
-class MainPresenter (val view : MainView){
+import moxy.MvpPresenter
 
-    val model = CounterModel()
+class MainPresenter (private val model : CounterModel): MvpPresenter<MainView>(){
 
-    fun counterClick(counter: Counters){
-        val nextValue = model.next(counter.indexValue)
-        view.setButtonText(counter, nextValue.toString())
+    fun counterOneClick(counters: Counters) {
+        val nextValue = model.next(counters.indexValue)
+        viewState.setButtonOneText(nextValue.toString())
+    }
+
+    fun counterTwoClick(counters: Counters) {
+        val nextValue = model.next(counters.indexValue)
+        viewState.setButtonTwoText(nextValue.toString())
+    }
+
+    fun counterThreeClick(counters: Counters) {
+        val nextValue = model.next(counters.indexValue)
+        viewState.setButtonThreeText(nextValue.toString())
     }
 }
