@@ -7,7 +7,7 @@ import com.example.githubclient.mvp.view.MainView
 import com.example.githubclient.mvp.view.list.UserItemView
 import moxy.MvpPresenter
 
-class MainPresenter (private val usersRepo: GithubUsersRepo): MvpPresenter<MainView>(){
+class MainPresenter(private val usersRepo: GithubUsersRepo) : MvpPresenter<MainView>() {
 
     val userListPresenter = UsersListPresenter()
 
@@ -15,18 +15,18 @@ class MainPresenter (private val usersRepo: GithubUsersRepo): MvpPresenter<MainV
         super.onFirstViewAttach()
         viewState.init()
         loadData()
-        userListPresenter.itemClickListener = {itemView->
+        userListPresenter.itemClickListener = { itemView ->
             //TODO homework
         }
     }
 
-    private fun loadData(){
+    private fun loadData() {
         val users = usersRepo.getUsers()
         userListPresenter.users.addAll(users)
         viewState.updateList()
     }
 
-    class UsersListPresenter :IUserListPresenter{
+    class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUser>()
 
         override var itemClickListener: ((UserItemView) -> Unit)? = null

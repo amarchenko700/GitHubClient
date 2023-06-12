@@ -2,9 +2,9 @@ package com.example.githubclient.ui.activity
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubclient.mvp.presenter.MainPresenter
 import com.example.githubclient.databinding.ActivityMainBinding
 import com.example.githubclient.mvp.model.GithubUsersRepo
+import com.example.githubclient.mvp.presenter.MainPresenter
 import com.example.githubclient.mvp.view.MainView
 import com.example.githubclient.ui.adapter.UsersRVAdapter
 import moxy.MvpAppCompatActivity
@@ -15,7 +15,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     private var _binding: ActivityMainBinding? = null
     val binding: ActivityMainBinding get() = _binding!!
     private val presenter by moxyPresenter { MainPresenter(GithubUsersRepo()) }
-    private var adapter : UsersRVAdapter? = null
+    private var adapter: UsersRVAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +30,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun init() {
         adapter = UsersRVAdapter(presenter.userListPresenter)
-        binding.rvUsers.let{
+        binding.rvUsers.let {
             it.layoutManager = LinearLayoutManager(this@MainActivity)
-            it.adapter= adapter
+            it.adapter = adapter
         }
     }
 

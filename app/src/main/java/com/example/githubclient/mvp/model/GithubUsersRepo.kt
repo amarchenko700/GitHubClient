@@ -11,5 +11,5 @@ class GithubUsersRepo {
         GithubUser("login7")
     )
 
-    fun getUsers() : List<GithubUser> = users
+    fun getUsers(): List<GithubUser> = users
 }
