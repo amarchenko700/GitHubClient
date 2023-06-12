@@ -7,8 +7,6 @@ import com.example.githubclient.R
 import com.example.githubclient.databinding.ActivityMainBinding
 import com.example.githubclient.mvp.presenter.MainPresenter
 import com.example.githubclient.mvp.view.MainView
-import com.example.githubclient.navigation.AndroidScreens
-import com.example.githubclient.ui.adapter.UsersRVAdapter
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -18,9 +16,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     private var _binding: ActivityMainBinding? = null
     private val binding: ActivityMainBinding get() = _binding!!
     private val presenter by moxyPresenter {
-        MainPresenter(App.instance.router, AndroidScreens())
+        MainPresenter(App.instance.router, App.instance.androidScreens)
     }
-    private var adapter: UsersRVAdapter? = null
+
     private val navigator = AppNavigator(this, R.id.container)
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
