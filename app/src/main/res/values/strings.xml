@@ -3,5 +3,8 @@
     <string name="counter_one">Счетчик 1</string>
     <string name="counter_two">Счетчик 2</string>
     <string name="counter_three">Счетчик 3</string>
-
+    <string name="exit_app">Выход из приложения</string>
+    <string name="confirm_exit_app">Вы действительно хотите выйти из приложения?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>

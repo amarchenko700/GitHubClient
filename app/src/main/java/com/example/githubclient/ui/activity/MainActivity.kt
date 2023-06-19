@@ -2,6 +2,7 @@ package com.example.githubclient.ui.activity
 
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import com.example.githubclient.App
 import com.example.githubclient.R
 import com.example.githubclient.databinding.ActivityMainBinding
@@ -23,9 +24,27 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            supportFragmentManager.fragments.forEach {
-                if (it is BackButtonListener && it.backPressed()) return
-                presenter.backClicked()
+            if (supportFragmentManager.backStackEntryCount == 1) {
+                AlertDialog.Builder(this@MainActivity)
+                    .setTitle(getString(R.string.exit_app))
+                    .setMessage(getString(R.string.confirm_exit_app))
+                    .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                        val lastFragment = supportFragmentManager.fragments[0]
+                        if (lastFragment is BackButtonListener) lastFragment.backPressed()
+                        presenter.backClicked()
+                        finish()
+                    }
+                    .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .create()
+                    .show()
+            }else{
+                supportFragmentManager.fragments.forEach {
+                    if (it is BackButtonListener && it.backPressed()) {
+                        return
+                    }
+                }
             }
         }
     }
@@ -34,7 +53,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        onBackPressedDispatcher.addCallback(onBackPressedCallback)
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     override fun onResumeFragments() {

@@ -13,7 +13,7 @@ class MainPresenter(private val router: Router, private val screens: IScreens) :
     }
 
     fun backClicked() {
-        router.exit()
+        router.finishChain()
     }
 
 }
