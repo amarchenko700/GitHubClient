@@ -8,6 +8,8 @@ import com.example.githubclient.R
 import com.example.githubclient.databinding.ActivityMainBinding
 import com.example.githubclient.mvp.presenter.MainPresenter
 import com.example.githubclient.mvp.view.MainView
+import com.example.githubclient.rxjava.Creation
+import com.example.githubclient.rxjava.Operators
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -54,6 +56,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+        //Creation().exec()
+        Operators().exec()
     }
 
     override fun onResumeFragments() {
