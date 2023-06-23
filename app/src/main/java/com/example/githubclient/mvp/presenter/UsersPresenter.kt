@@ -7,6 +7,8 @@ import com.example.githubclient.mvp.view.UsersView
 import com.example.githubclient.mvp.view.list.UserItemView
 import com.example.githubclient.navigation.IScreens
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
 import moxy.MvpPresenter
 
 class UsersPresenter(
@@ -28,10 +30,30 @@ class UsersPresenter(
         }
     }
 
+    private val githubUsersObserver = object : Observer<GithubUser> {
+        override fun onSubscribe(d: Disposable) {
+            println("onSubscribe")
+        }
+
+        override fun onError(e: Throwable) {
+            println("onError: ${e.message}")
+        }
+
+        override fun onComplete() {
+            viewState.updateList()
+        }
+
+        override fun onNext(githubUser: GithubUser) {
+            userListPresenter.users.add(githubUser)
+        }
+
+    }
+
     private fun loadData() {
-        val users = usersRepo.getUsers()
-        userListPresenter.users.addAll(users)
-        viewState.updateList()
+//        val users = usersRepo.getUsers()
+//        userListPresenter.users.addAll(users)
+//        viewState.updateList()
+        usersRepo.getRXUsers().subscribe(githubUsersObserver)
     }
 
     class UsersListPresenter : IUserListPresenter {
