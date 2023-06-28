@@ -58,8 +58,6 @@ class UsersPresenter(
                 usersListPresenter.users.clear()
                 usersListPresenter.users.addAll(repos)
                 viewState.updateList()
-            }, {
-                println("onError Completable: ${it.message}")
             })
     }
 
