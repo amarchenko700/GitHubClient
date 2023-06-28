@@ -1,7 +1,6 @@
 package com.example.githubclient.rxjava
 
 import android.os.Handler
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Observable
@@ -181,7 +180,7 @@ class Sources {
 //                    return@onErrorReturn "01"
 //                }
 
-                .onErrorResumeNext {t->
+                .onErrorResumeNext { t ->
                     return@onErrorResumeNext Observable.just("02")
                 }
 
@@ -194,9 +193,9 @@ class Sources {
                     { s ->
                         println("onNext $s")
                         println(Thread.currentThread().name)
-                    },{e->
+                    }, { e ->
                         println("onError ${e.message}")
-                    },{
+                    }, {
                         println("onComplete")
                     }
                 )

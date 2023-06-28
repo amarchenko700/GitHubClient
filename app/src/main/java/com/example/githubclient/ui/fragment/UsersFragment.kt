@@ -3,11 +3,14 @@ package com.example.githubclient.ui.fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentUsersBinding
-import com.example.githubclient.mvp.model.GithubUsersRepo
+import com.example.githubclient.mvp.model.api.ApiHolder
+import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
 import com.example.githubclient.mvp.presenter.UsersPresenter
 import com.example.githubclient.mvp.view.UsersView
 import com.example.githubclient.ui.activity.BackButtonListener
 import com.example.githubclient.ui.adapter.UsersRVAdapter
+import com.example.githubclient.ui.image.GlideImageLoader
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.ktx.moxyPresenter
 
 class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::inflate), UsersView,
@@ -16,7 +19,10 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
     private var adapter: UsersRVAdapter? = null
 
     val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(GithubUsersRepo(), App.instance.router, App.instance.androidScreens)
+        UsersPresenter(
+            AndroidSchedulers.mainThread(),
+            RetrofitGithubUsersRepo(ApiHolder.api), App.instance.router, App.instance.androidScreens
+        )
     }
 
     companion object {
@@ -24,7 +30,7 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
     }
 
     override fun init() {
-        adapter = UsersRVAdapter(presenter.userListPresenter)
+        adapter = UsersRVAdapter(presenter.usersListPresenter, GlideImageLoader())
         binding.rvUsers.let {
             it.layoutManager = LinearLayoutManager(context)
             it.adapter = adapter

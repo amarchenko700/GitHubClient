@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentUserBinding
-import com.example.githubclient.mvp.model.GithubUser
+import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.presenter.UserPresenter
 import com.example.githubclient.mvp.view.UserView
 import com.example.githubclient.ui.activity.BackButtonListener

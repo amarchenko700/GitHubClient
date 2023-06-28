@@ -1,6 +1,6 @@
 package com.example.githubclient.navigation
 
-import com.example.githubclient.mvp.model.GithubUser
+import com.example.githubclient.mvp.model.entity.GithubUser
 import com.github.terrakok.cicerone.Screen
 
 interface IScreens {

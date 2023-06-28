@@ -8,51 +8,52 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class BackPressure {
 
-    fun exec(){
+    fun exec() {
         Consumer(Producer()).exec()
     }
 
-    class Producer{
+    class Producer {
         fun noBackPressure() = Observable.range(0, 10000000).subscribeOn(Schedulers.io())
 
-        fun backPressure() = Flowable.range(0, 10000000).subscribeOn(Schedulers.io()).onBackpressureLatest()
+        fun backPressure() =
+            Flowable.range(0, 10000000).subscribeOn(Schedulers.io()).onBackpressureLatest()
 
         fun observable1() = Observable.just("1")
         fun observable2() = Observable.just("2")
     }
 
-    class Consumer(val producer: Producer){
+    class Consumer(val producer: Producer) {
 
-        fun consumeNoBackPressure(){
+        fun consumeNoBackPressure() {
             producer.noBackPressure()
                 .subscribeOn(Schedulers.computation())
                 .subscribe({
                     Thread.sleep(5000)
                     println(it.toString())
-                },{
+                }, {
                     println("onError ${it.message}")
                 })
         }
 
-        fun consumeBackPressure(){
+        fun consumeBackPressure() {
             producer.backPressure()
                 .observeOn(Schedulers.computation(), false, 1)
                 .subscribe({
                     Thread.sleep(1000)
                     println(it.toString())
-                },{
+                }, {
                     println("onError ${it.message}")
                 })
         }
 
-        fun execComposite(){
+        fun execComposite() {
             val compositeDisposable = CompositeDisposable()
 
-            val disposable1 = producer.observable1().subscribe{
+            val disposable1 = producer.observable1().subscribe {
                 println(it)
             }
 
-            val disposable2 = producer.observable2().subscribe{
+            val disposable2 = producer.observable2().subscribe {
                 println(it)
             }
 
@@ -60,7 +61,7 @@ class BackPressure {
             compositeDisposable.addAll(disposable2)
         }
 
-        fun exec(){
+        fun exec() {
             //consumeNoBackPressure()
             consumeBackPressure()
             //execComposite()
