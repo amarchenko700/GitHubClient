@@ -2,6 +2,7 @@ package com.example.githubclient.mvp.presenter
 
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepository
+import com.example.githubclient.mvp.model.repo.IGithubRepositoriesRepo
 import com.example.githubclient.mvp.model.repo.IGithubUsersRepo
 import com.example.githubclient.mvp.presenter.listUserRepo.IUserRepoListPresenter
 import com.example.githubclient.mvp.view.UserView
@@ -13,7 +14,7 @@ import moxy.MvpPresenter
 
 class UserPresenter(
     private val uiScheduler: Scheduler,
-    private val usersRepo: IGithubUsersRepo,
+    private val usersRepo: IGithubRepositoriesRepo,
     private val router: Router,
     private val screens: IScreens,
     private val githubUser: GithubUser
@@ -38,7 +39,7 @@ class UserPresenter(
     }
 
     private fun loadData() {
-        usersRepo.getUserRepo(githubUser.login)
+        usersRepo.getRepositories(githubUser)
             .observeOn(uiScheduler)
             .subscribe({ repos ->
                 userRepoListPresenter.userRepositories.clear()

@@ -15,6 +15,7 @@ class RetrofitGithubRepositoriesRepo(
     private val networkStatus: INetworkStatus,
     private val db: Database
 ) : IGithubRepositoriesRepo {
+
     override fun getRepositories(user: GithubUser) =
         networkStatus.isOnlineSingle().flatMap { isOnline ->
             if (isOnline) {

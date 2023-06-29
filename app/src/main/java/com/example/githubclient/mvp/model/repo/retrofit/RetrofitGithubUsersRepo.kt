@@ -39,6 +39,4 @@ class RetrofitGithubUsersRepo(
     }.subscribeOn(Schedulers.io())
 
     //override fun getUsers() = api.getUsers().subscribeOn(Schedulers.io())
-    override fun getUserRepo(userName: String) =
-        api.getUserRepo(userName).subscribeOn(Schedulers.io())
 }
