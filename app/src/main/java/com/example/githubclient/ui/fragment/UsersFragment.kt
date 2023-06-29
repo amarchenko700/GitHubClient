@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentUsersBinding
 import com.example.githubclient.mvp.model.api.ApiHolder
+import com.example.githubclient.mvp.model.entity.room.Database
 import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
 import com.example.githubclient.mvp.presenter.UsersPresenter
 import com.example.githubclient.mvp.view.UsersView
@@ -21,7 +22,9 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
     val presenter: UsersPresenter by moxyPresenter {
         UsersPresenter(
             AndroidSchedulers.mainThread(),
-            RetrofitGithubUsersRepo(ApiHolder.api), App.instance.router, App.instance.androidScreens
+            RetrofitGithubUsersRepo(ApiHolder.api, App.networkStatus, Database.getInstance()),
+            App.instance.router,
+            App.instance.androidScreens
         )
     }
 

@@ -21,7 +21,7 @@ class UserRepoFragment(private val githubUserRepo: GithubUserRepository) :
 
     override fun init() {
         binding.repoName.text = githubUserRepo.name
-        binding.repoForks.text = githubUserRepo.forks_count.toString()
+        binding.repoForks.text = githubUserRepo.forksCount.toString()
     }
 
     companion object {

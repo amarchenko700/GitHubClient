@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class GithubUser(
-    val id: Int,
+    val id: String,
     val login: String,
     val avatarUrl: String? = null,
     val reposUrl: String? = null
