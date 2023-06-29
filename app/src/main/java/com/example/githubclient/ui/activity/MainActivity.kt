@@ -7,7 +7,7 @@ import com.example.githubclient.App
 import com.example.githubclient.R
 import com.example.githubclient.databinding.ActivityMainBinding
 import com.example.githubclient.mvp.presenter.MainPresenter
-import com.example.githubclient.mvp.view.MainView
+import com.example.githubclient.ui.fragment.view.MainView
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter

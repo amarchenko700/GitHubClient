@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubclient.databinding.ItemUserRepoBinding
 import com.example.githubclient.mvp.presenter.listUserRepo.IUserRepoListPresenter
-import com.example.githubclient.mvp.view.listUserRepo.UserRepoItemView
+import com.example.githubclient.ui.fragment.view.listUserRepo.UserRepoItemView
 
 class UserRepoRVAdapter(val presenter: IUserRepoListPresenter) :
     RecyclerView.Adapter<UserRepoRVAdapter.ViewHolder>() {

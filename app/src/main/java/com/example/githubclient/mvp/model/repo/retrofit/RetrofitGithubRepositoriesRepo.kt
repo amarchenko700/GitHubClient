@@ -1,11 +1,11 @@
 package com.example.githubclient.mvp.model.repo.retrofit
 
+import com.example.githubclient.App
 import com.example.githubclient.mvp.model.api.IDataSource
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepository
 import com.example.githubclient.mvp.model.entity.network.INetworkStatus
 import com.example.githubclient.mvp.model.entity.room.Database
-import com.example.githubclient.mvp.model.entity.room.RoomGithubRepository
 import com.example.githubclient.mvp.model.repo.IGithubRepositoriesRepo
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -22,19 +22,7 @@ class RetrofitGithubRepositoriesRepo(
                 user.reposUrl?.let { url ->
                     api.getUserRepo(user.login).flatMap { repositories ->
                         Single.fromCallable {
-                            val roomUser = db.userDao.findByLogin(user.login)
-                                ?: throw RuntimeException("No such user in cache")
-
-                            val roomRepos = repositories.map {
-                                RoomGithubRepository(
-                                    it.id,
-                                    it.name,
-                                    it.forksCount,
-                                    roomUser.id
-                                )
-                            }
-
-                            db.repositoryDao.insert(roomRepos)
+                            App.githubRepoCache.saveGithubUsersRepoIntoCache(db, user, repositories)
                             repositories
                         }
                     }
@@ -45,12 +33,7 @@ class RetrofitGithubRepositoriesRepo(
                         )
             } else {
                 Single.fromCallable {
-                    val roomUser = db.userDao.findByLogin(user.login)
-                        ?: throw RuntimeException("No such user in cache")
-
-                    db.repositoryDao.findForUser(roomUser.id).map {
-                        GithubUserRepository(it.id, it.name, it.forksCount)
-                    }
+                    App.githubRepoCache.getGithubUsersRepo(db, user)
                 }
             }
         }.subscribeOn(Schedulers.io())

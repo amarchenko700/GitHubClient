@@ -7,9 +7,9 @@ import com.example.githubclient.mvp.model.api.ApiHolder
 import com.example.githubclient.mvp.model.entity.room.Database
 import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
 import com.example.githubclient.mvp.presenter.UsersPresenter
-import com.example.githubclient.mvp.view.UsersView
 import com.example.githubclient.ui.activity.BackButtonListener
 import com.example.githubclient.ui.adapter.UsersRVAdapter
+import com.example.githubclient.ui.fragment.view.UsersView
 import com.example.githubclient.ui.image.GlideImageLoader
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.ktx.moxyPresenter

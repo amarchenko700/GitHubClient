@@ -4,8 +4,8 @@ import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentUserRepoBinding
 import com.example.githubclient.mvp.model.entity.GithubUserRepository
 import com.example.githubclient.mvp.presenter.UserRepoPresenter
-import com.example.githubclient.mvp.view.UserRepoView
 import com.example.githubclient.ui.activity.BackButtonListener
+import com.example.githubclient.ui.fragment.view.UserRepoView
 import moxy.ktx.moxyPresenter
 
 class UserRepoFragment(private val githubUserRepo: GithubUserRepository) :

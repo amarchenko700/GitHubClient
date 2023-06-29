@@ -3,11 +3,10 @@ package com.example.githubclient.mvp.presenter
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepository
 import com.example.githubclient.mvp.model.repo.IGithubRepositoriesRepo
-import com.example.githubclient.mvp.model.repo.IGithubUsersRepo
 import com.example.githubclient.mvp.presenter.listUserRepo.IUserRepoListPresenter
-import com.example.githubclient.mvp.view.UserView
-import com.example.githubclient.mvp.view.listUserRepo.UserRepoItemView
 import com.example.githubclient.navigation.IScreens
+import com.example.githubclient.ui.fragment.view.UserView
+import com.example.githubclient.ui.fragment.view.listUserRepo.UserRepoItemView
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter

@@ -9,7 +9,7 @@ import androidx.room.Update
 import com.example.githubclient.mvp.model.entity.room.RoomGithubUser
 
 @Dao
-interface  UserDao {
+interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: RoomGithubUser)
 

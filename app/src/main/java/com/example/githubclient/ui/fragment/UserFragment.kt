@@ -7,11 +7,10 @@ import com.example.githubclient.mvp.model.api.ApiHolder
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.room.Database
 import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubRepositoriesRepo
-import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
 import com.example.githubclient.mvp.presenter.UserPresenter
-import com.example.githubclient.mvp.view.UserView
 import com.example.githubclient.ui.activity.BackButtonListener
 import com.example.githubclient.ui.adapter.UserRepoRVAdapter
+import com.example.githubclient.ui.fragment.view.UserView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.ktx.moxyPresenter
 
@@ -24,7 +23,11 @@ class UserFragment(private val githubUser: GithubUser) :
     val presenter: UserPresenter by moxyPresenter {
         UserPresenter(
             AndroidSchedulers.mainThread(),
-            RetrofitGithubRepositoriesRepo(ApiHolder.api, App.networkStatus, Database.getInstance()),
+            RetrofitGithubRepositoriesRepo(
+                ApiHolder.api,
+                App.networkStatus,
+                Database.getInstance()
+            ),
             App.instance.router,
             App.instance.androidScreens,
             githubUser

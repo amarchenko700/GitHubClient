@@ -3,7 +3,6 @@ package com.example.githubclient.mvp.model.entity.room
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.example.githubclient.mvp.model.entity.room.RoomGithubUser
 
 @Entity(
     foreignKeys = [ForeignKey(
