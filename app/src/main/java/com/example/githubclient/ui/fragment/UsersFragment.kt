@@ -3,9 +3,6 @@ package com.example.githubclient.ui.fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentUsersBinding
-import com.example.githubclient.mvp.model.api.ApiHolder
-import com.example.githubclient.mvp.model.entity.room.Database
-import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
 import com.example.githubclient.mvp.presenter.UsersPresenter
 import com.example.githubclient.ui.activity.BackButtonListener
 import com.example.githubclient.ui.adapter.UsersRVAdapter
@@ -20,12 +17,9 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
     private var adapter: UsersRVAdapter? = null
 
     val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(
-            AndroidSchedulers.mainThread(),
-            RetrofitGithubUsersRepo(ApiHolder.api, App.networkStatus, Database.getInstance()),
-            App.instance.router,
-            App.instance.androidScreens
-        )
+        UsersPresenter(AndroidSchedulers.mainThread()).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     companion object {
