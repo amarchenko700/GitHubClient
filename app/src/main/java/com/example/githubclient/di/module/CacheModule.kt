@@ -21,7 +21,7 @@ class CacheModule {
 
     @Singleton
     @Provides
-    fun usersCache(database: Database): IGithubRepoCache = GithubRepoCache()
+    fun usersCache(): IGithubRepoCache = GithubRepoCache()
 
 
 }
