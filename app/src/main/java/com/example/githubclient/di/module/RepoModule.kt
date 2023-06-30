@@ -27,6 +27,10 @@ class RepoModule {
 
     @Singleton
     @Provides
-    fun repositoriesRepo(api: IDataSource, networkStatus: INetworkStatus)
-            : IGithubRepositoriesRepo = RetrofitGithubRepositoriesRepo(api, networkStatus)
+    fun repositoriesRepo(
+        api: IDataSource, networkStatus: INetworkStatus, db: Database,
+        cache: IGithubRepoCache
+    )
+            : IGithubRepositoriesRepo =
+        RetrofitGithubRepositoriesRepo(api, networkStatus, db, cache)
 }

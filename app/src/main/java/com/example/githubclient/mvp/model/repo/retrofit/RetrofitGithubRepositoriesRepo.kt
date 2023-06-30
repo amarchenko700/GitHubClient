@@ -9,18 +9,13 @@ import com.example.githubclient.mvp.model.repo.IGithubRepoCache
 import com.example.githubclient.mvp.model.repo.IGithubRepositoriesRepo
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import javax.inject.Inject
 
 class RetrofitGithubRepositoriesRepo(
     private val api: IDataSource,
-    private val networkStatus: INetworkStatus
+    private val networkStatus: INetworkStatus,
+    private val db: Database,
+    private val cache: IGithubRepoCache
 ) : IGithubRepositoriesRepo {
-
-    @Inject
-    lateinit var db: Database
-
-    @Inject
-    lateinit var cache: IGithubRepoCache
 
     override fun getRepositories(user: GithubUser) =
         networkStatus.isOnlineSingle().flatMap { isOnline ->

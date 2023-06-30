@@ -1,5 +1,6 @@
 package com.example.githubclient.ui.fragment
 
+import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentUserRepoBinding
 import com.example.githubclient.mvp.model.entity.GithubUserRepository
 import com.example.githubclient.mvp.presenter.UserRepoPresenter
@@ -33,6 +34,9 @@ class UserRepoFragment(private val githubUserRepo: GithubUserRepository) :
     }
 
     companion object {
-        fun newInstance(githubUserRepo: GithubUserRepository) = UserRepoFragment(githubUserRepo)
+        fun newInstance(githubUserRepo: GithubUserRepository) =
+            UserRepoFragment(githubUserRepo).apply {
+                App.instance.appComponent.inject(this)
+            }
     }
 }
