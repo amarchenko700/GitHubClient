@@ -4,12 +4,6 @@ import android.app.Application
 import com.example.githubclient.di.AppComponent
 import com.example.githubclient.di.DaggerAppComponent
 import com.example.githubclient.di.module.AppModule
-import com.example.githubclient.mvp.model.entity.room.Database
-import com.example.githubclient.mvp.model.repo.GithubRepoCache
-import com.example.githubclient.navigation.AndroidScreens
-import com.gb.poplib.githubclient.ui.network.AndroidNetworkStatus
-import com.github.terrakok.cicerone.Cicerone
-import com.github.terrakok.cicerone.Router
 
 class App : Application() {
     companion object {

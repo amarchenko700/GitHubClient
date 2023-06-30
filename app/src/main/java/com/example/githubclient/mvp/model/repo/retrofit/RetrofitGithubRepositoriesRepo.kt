@@ -1,6 +1,5 @@
 package com.example.githubclient.mvp.model.repo.retrofit
 
-import com.example.githubclient.App
 import com.example.githubclient.mvp.model.api.IDataSource
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepository

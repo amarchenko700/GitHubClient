@@ -12,11 +12,9 @@ import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
 import moxy.MvpPresenter
 import javax.inject.Inject
+import javax.inject.Named
 
-class UsersPresenter(
-    private val uiScheduler: Scheduler
-
-) :
+class UsersPresenter :
     MvpPresenter<UsersView>() {
 
     val usersListPresenter = UsersListPresenter()
@@ -29,6 +27,10 @@ class UsersPresenter(
 
     @Inject
     lateinit var screens: IScreens
+
+    @Named("mainThread")
+    @Inject
+    lateinit var uiScheduler: Scheduler
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

@@ -6,6 +6,7 @@ import com.example.githubclient.di.module.CacheModule
 import com.example.githubclient.di.module.CiceroneModule
 import com.example.githubclient.di.module.RepoModule
 import com.example.githubclient.mvp.presenter.MainPresenter
+import com.example.githubclient.mvp.presenter.UserPresenter
 import com.example.githubclient.mvp.presenter.UsersPresenter
 import com.example.githubclient.ui.activity.MainActivity
 import com.example.githubclient.ui.fragment.UserFragment
@@ -28,6 +29,7 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(mainPresenter: MainPresenter)
     fun inject(usersPresenter: UsersPresenter)
+    fun inject(userPresenter: UserPresenter)
 
     // убрать эти инъекции
     fun inject(usersFragment: UsersFragment)

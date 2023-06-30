@@ -1,6 +1,5 @@
 package com.example.githubclient.ui.fragment
 
-import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentUserRepoBinding
 import com.example.githubclient.mvp.model.entity.GithubUserRepository
 import com.example.githubclient.mvp.presenter.UserRepoPresenter
@@ -18,6 +17,7 @@ class UserRepoFragment(private val githubUserRepo: GithubUserRepository) :
 
     @Inject
     lateinit var router: Router
+
     @Inject
     lateinit var screens: IScreens
 

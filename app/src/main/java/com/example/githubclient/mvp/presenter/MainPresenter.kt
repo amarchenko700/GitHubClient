@@ -11,6 +11,7 @@ class MainPresenter :
 
     @Inject
     lateinit var router: Router
+
     @Inject
     lateinit var screens: IScreens
 
