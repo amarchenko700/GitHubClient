@@ -35,8 +35,5 @@ interface AppComponent {
     fun inject(userPresenter: UserPresenter)
     fun inject(usersRVAdapter: UsersRVAdapter)
 
-    // убрать эти инъекции
-    fun inject(usersFragment: UsersFragment)
-    fun inject(userFragment: UserFragment)
     fun inject(repositoryFragment: UserRepoFragment)
 }

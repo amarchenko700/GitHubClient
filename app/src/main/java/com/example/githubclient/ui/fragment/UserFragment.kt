@@ -42,9 +42,7 @@ class UserFragment(private val githubUser: GithubUser) :
     }
 
     companion object {
-        fun newInstance(githubUser: GithubUser) = UserFragment(githubUser).apply {
-            App.instance.appComponent.inject(this)
-        }
+        fun newInstance(githubUser: GithubUser) = UserFragment(githubUser)
     }
 
     override fun backPressed() = presenter.backPressed()
