@@ -11,9 +11,7 @@ import com.example.githubclient.mvp.presenter.UserPresenter
 import com.example.githubclient.mvp.presenter.UsersPresenter
 import com.example.githubclient.ui.activity.MainActivity
 import com.example.githubclient.ui.adapter.UsersRVAdapter
-import com.example.githubclient.ui.fragment.UserFragment
 import com.example.githubclient.ui.fragment.UserRepoFragment
-import com.example.githubclient.ui.fragment.UsersFragment
 import dagger.Component
 import javax.inject.Singleton
 
