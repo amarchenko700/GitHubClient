@@ -11,7 +11,7 @@ class GithubRepoCache : IGithubRepoCache {
     override fun saveUsersIntoCache(db: Database, githubUsers: List<GithubUser>) {
         val roomUsers = githubUsers.map { user ->
             RoomGithubUser(
-                user.id,
+                user.idMy,
                 user.login,
                 user.avatarUrl ?: "",
                 user.reposUrl ?: ""
