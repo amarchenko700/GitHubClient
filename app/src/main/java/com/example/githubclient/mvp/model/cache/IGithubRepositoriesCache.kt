@@ -1,13 +1,10 @@
-package com.example.githubclient.mvp.model.repo
+package com.example.githubclient.mvp.model.cache.room
 
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepository
 import com.example.githubclient.mvp.model.entity.room.Database
 
-interface IGithubRepoCache {
-    fun saveUsersIntoCache(db: Database, githubUsers: List<GithubUser>)
-    fun getGithubUsersFromCache(db: Database): List<GithubUser>
-
+interface IGithubRepositoriesCache {
     fun saveGithubUsersRepoIntoCache(
         db: Database,
         githubUser: GithubUser,

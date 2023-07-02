@@ -1,9 +1,10 @@
 package com.example.githubclient.di.module
 
 import com.example.githubclient.mvp.model.api.IDataSource
+import com.example.githubclient.mvp.model.cache.IGithubUsersCache
 import com.example.githubclient.mvp.model.entity.network.INetworkStatus
 import com.example.githubclient.mvp.model.entity.room.Database
-import com.example.githubclient.mvp.model.repo.IGithubRepoCache
+import com.example.githubclient.mvp.model.cache.room.IGithubRepositoriesCache
 import com.example.githubclient.mvp.model.repo.IGithubRepositoriesRepo
 import com.example.githubclient.mvp.model.repo.IGithubUsersRepo
 import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubRepositoriesRepo
@@ -21,7 +22,7 @@ class RepoModule {
         api: IDataSource,
         networkStatus: INetworkStatus,
         db: Database,
-        cache: IGithubRepoCache
+        cache: IGithubUsersCache
     )
             : IGithubUsersRepo = RetrofitGithubUsersRepo(api, networkStatus, db, cache)
 
@@ -29,7 +30,7 @@ class RepoModule {
     @Provides
     fun repositoriesRepo(
         api: IDataSource, networkStatus: INetworkStatus, db: Database,
-        cache: IGithubRepoCache
+        cache: IGithubRepositoriesCache
     )
             : IGithubRepositoriesRepo =
         RetrofitGithubRepositoriesRepo(api, networkStatus, db, cache)
