@@ -1,12 +1,13 @@
 package com.example.githubclient.mvp.presenter
 
+import com.example.githubclient.mvp.model.entity.GithubUserRepository
 import com.example.githubclient.navigation.IScreens
 import com.example.githubclient.ui.fragment.view.UserRepoView
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 import javax.inject.Inject
 
-class RepositoryPresenter() :
+class RepositoryPresenter(val githubRepository: GithubUserRepository) :
     MvpPresenter<UserRepoView>() {
 
     @Inject
@@ -14,7 +15,8 @@ class RepositoryPresenter() :
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.init()
+        viewState.setTitle(githubRepository.name)
+        viewState.setForksCount(githubRepository.forksCount)
     }
 
     fun backPressed(): Boolean {

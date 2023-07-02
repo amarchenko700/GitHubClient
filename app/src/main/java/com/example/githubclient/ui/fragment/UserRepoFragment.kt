@@ -17,16 +17,19 @@ class UserRepoFragment(private val githubUserRepo: GithubUserRepository) :
     ), UserRepoView, BackButtonListener {
 
     val presenter: RepositoryPresenter by moxyPresenter {
-        RepositoryPresenter().apply {
+        RepositoryPresenter(githubUserRepo).apply {
             App.instance.repositorySubcomponent?.inject(this)
         }
     }
 
     override fun backPressed() = presenter.backPressed()
 
-    override fun init() {
-        binding.repoName.text = githubUserRepo.name
-        binding.repoForks.text = githubUserRepo.forksCount.toString()
+    override fun setTitle(text: String) {
+        binding.repoName.text = text
+    }
+
+    override fun setForksCount(forksCount: Int) {
+        binding.repoForks.text = forksCount.toString()
     }
 
     companion object {
