@@ -37,7 +37,7 @@ class UserFragment(private val githubUser: GithubUser) :
         UserPresenter(
             githubUser
         ).apply {
-            App.instance.appComponent.inject(this)
+            App.instance.initRepositorySubcomponent()?.inject(this)
         }
     }
 

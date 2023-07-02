@@ -1,5 +1,6 @@
 package com.example.githubclient.mvp.presenter
 
+import com.example.githubclient.di.user.module.IUserScopeContainer
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.repo.IGithubUsersRepo
 import com.example.githubclient.mvp.presenter.list.IUserListPresenter
@@ -31,6 +32,8 @@ class UsersPresenter :
     @Named("mainThread")
     @Inject
     lateinit var uiScheduler: Scheduler
+
+    @Inject lateinit var userScopeContainer: IUserScopeContainer
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -93,4 +96,8 @@ class UsersPresenter :
         return true
     }
 
+    override fun onDestroy() {
+        userScopeContainer.releaseUserScope()
+        super.onDestroy()
+    }
 }

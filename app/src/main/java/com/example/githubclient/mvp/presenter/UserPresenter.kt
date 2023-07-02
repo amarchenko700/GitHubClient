@@ -1,5 +1,6 @@
 package com.example.githubclient.mvp.presenter
 
+import com.example.githubclient.di.repository.module.IRepositoryScopeContainer
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepository
 import com.example.githubclient.mvp.model.repo.IGithubRepositoriesRepo
@@ -29,9 +30,10 @@ class UserPresenter(
     @Inject
     lateinit var uiScheduler: Scheduler
 
-
     @Inject
     lateinit var screens: IScreens
+
+    @Inject lateinit var repositoryScopeContainer: IRepositoryScopeContainer
 
     fun backPressed(): Boolean {
         router.exit()
@@ -71,5 +73,10 @@ class UserPresenter(
 
         override fun getCount() = userRepositories.size
 
+    }
+
+    override fun onDestroy() {
+        repositoryScopeContainer.releaseRepositoryScope()
+        super.onDestroy()
     }
 }
