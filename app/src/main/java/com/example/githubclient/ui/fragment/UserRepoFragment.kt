@@ -4,12 +4,9 @@ import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentUserRepoBinding
 import com.example.githubclient.mvp.model.entity.GithubUserRepository
 import com.example.githubclient.mvp.presenter.RepositoryPresenter
-import com.example.githubclient.navigation.IScreens
 import com.example.githubclient.ui.activity.BackButtonListener
 import com.example.githubclient.ui.fragment.view.UserRepoView
-import com.github.terrakok.cicerone.Router
 import moxy.ktx.moxyPresenter
-import javax.inject.Inject
 
 class UserRepoFragment(private val githubUserRepo: GithubUserRepository) :
     BaseFragment<FragmentUserRepoBinding>(

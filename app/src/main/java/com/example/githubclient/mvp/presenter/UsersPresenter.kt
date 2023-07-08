@@ -33,7 +33,8 @@ class UsersPresenter :
     @Inject
     lateinit var uiScheduler: Scheduler
 
-    @Inject lateinit var userScopeContainer: IUserScopeContainer
+    @Inject
+    lateinit var userScopeContainer: IUserScopeContainer
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

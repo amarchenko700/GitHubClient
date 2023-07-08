@@ -33,7 +33,8 @@ class UserPresenter(
     @Inject
     lateinit var screens: IScreens
 
-    @Inject lateinit var repositoryScopeContainer: IRepositoryScopeContainer
+    @Inject
+    lateinit var repositoryScopeContainer: IRepositoryScopeContainer
 
     fun backPressed(): Boolean {
         router.exit()

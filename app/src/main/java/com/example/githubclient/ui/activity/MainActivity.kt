@@ -63,6 +63,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         setContentView(binding.root)
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
         App.instance.appComponent.inject(this)
+        binding.bottomNavigationMenu.setOnItemSelectedListener {
+            presenter.onBottomNavigationItemClick(it.itemId)
+        }
         //Creation().exec()
         //Operators().exec()
         //Sources().exec()
