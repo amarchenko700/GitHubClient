@@ -6,11 +6,15 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubclient.databinding.ItemUserBinding
 import com.example.githubclient.mvp.presenter.list.IUserListPresenter
-import com.example.githubclient.ui.fragment.view.IImageLoader
 import com.example.githubclient.ui.fragment.view.list.UserItemView
+import com.example.githubclient.ui.image.IImageLoader
+import javax.inject.Inject
 
-class UsersRVAdapter(val presenter: IUserListPresenter, val imageLoader: IImageLoader<ImageView>) :
+class UsersRVAdapter(val presenter: IUserListPresenter) :
     RecyclerView.Adapter<UsersRVAdapter.ViewHolder>() {
+
+    @Inject
+    lateinit var imageLoader: IImageLoader<ImageView>
 
     inner class ViewHolder(private val vb: ItemUserBinding) : RecyclerView.ViewHolder(vb.root),
         UserItemView {

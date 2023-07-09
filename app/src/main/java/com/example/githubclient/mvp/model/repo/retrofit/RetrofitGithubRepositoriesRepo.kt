@@ -1,11 +1,11 @@
 package com.example.githubclient.mvp.model.repo.retrofit
 
-import com.example.githubclient.App
 import com.example.githubclient.mvp.model.api.IDataSource
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepository
 import com.example.githubclient.mvp.model.entity.network.INetworkStatus
 import com.example.githubclient.mvp.model.entity.room.Database
+import com.example.githubclient.mvp.model.repo.IGithubRepoCache
 import com.example.githubclient.mvp.model.repo.IGithubRepositoriesRepo
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -13,7 +13,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 class RetrofitGithubRepositoriesRepo(
     private val api: IDataSource,
     private val networkStatus: INetworkStatus,
-    private val db: Database
+    private val db: Database,
+    private val cache: IGithubRepoCache
 ) : IGithubRepositoriesRepo {
 
     override fun getRepositories(user: GithubUser) =
@@ -22,7 +23,7 @@ class RetrofitGithubRepositoriesRepo(
                 user.reposUrl?.let { url ->
                     api.getUserRepo(user.login).flatMap { repositories ->
                         Single.fromCallable {
-                            App.githubRepoCache.saveGithubUsersRepoIntoCache(db, user, repositories)
+                            cache.saveGithubUsersRepoIntoCache(db, user, repositories)
                             repositories
                         }
                     }
@@ -33,7 +34,7 @@ class RetrofitGithubRepositoriesRepo(
                         )
             } else {
                 Single.fromCallable {
-                    App.githubRepoCache.getGithubUsersRepo(db, user)
+                    cache.getGithubUsersRepo(db, user)
                 }
             }
         }.subscribeOn(Schedulers.io())

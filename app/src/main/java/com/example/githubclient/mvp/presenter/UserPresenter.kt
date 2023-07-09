@@ -10,16 +10,28 @@ import com.example.githubclient.ui.fragment.view.listUserRepo.UserRepoItemView
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
+import javax.inject.Inject
+import javax.inject.Named
 
 class UserPresenter(
-    private val uiScheduler: Scheduler,
-    private val usersRepo: IGithubRepositoriesRepo,
-    private val router: Router,
-    private val screens: IScreens,
     private val githubUser: GithubUser
 ) : MvpPresenter<UserView>() {
 
     val userRepoListPresenter = UserListRepoPresenter()
+
+    @Inject
+    lateinit var userRepositoriesRepo: IGithubRepositoriesRepo
+
+    @Inject
+    lateinit var router: Router
+
+    @Named("mainThread")
+    @Inject
+    lateinit var uiScheduler: Scheduler
+
+
+    @Inject
+    lateinit var screens: IScreens
 
     fun backPressed(): Boolean {
         router.exit()
@@ -38,7 +50,7 @@ class UserPresenter(
     }
 
     private fun loadData() {
-        usersRepo.getRepositories(githubUser)
+        userRepositoriesRepo.getRepositories(githubUser)
             .observeOn(uiScheduler)
             .subscribe({ repos ->
                 userRepoListPresenter.userRepositories.clear()

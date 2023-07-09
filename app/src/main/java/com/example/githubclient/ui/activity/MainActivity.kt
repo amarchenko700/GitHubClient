@@ -8,16 +8,24 @@ import com.example.githubclient.R
 import com.example.githubclient.databinding.ActivityMainBinding
 import com.example.githubclient.mvp.presenter.MainPresenter
 import com.example.githubclient.ui.fragment.view.MainView
+import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
     private var _binding: ActivityMainBinding? = null
     private val binding: ActivityMainBinding get() = _binding!!
+
+    @Inject
+    lateinit var navigatorHolder: NavigatorHolder
+
     private val presenter by moxyPresenter {
-        MainPresenter(App.instance.router, App.instance.androidScreens)
+        MainPresenter().apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     private val navigator = AppNavigator(this, R.id.container)
@@ -54,6 +62,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+        App.instance.appComponent.inject(this)
         //Creation().exec()
         //Operators().exec()
         //Sources().exec()
@@ -62,12 +71,12 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onResumeFragments() {
         super.onResumeFragments()
-        App.instance.navigatorHolder.setNavigator(navigator)
+        navigatorHolder.setNavigator(navigator)
     }
 
     override fun onPause() {
         super.onPause()
-        App.instance.navigatorHolder.removeNavigator()
+        navigatorHolder.removeNavigator()
     }
 
     override fun onDestroy() {

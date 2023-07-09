@@ -11,16 +11,26 @@ import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
 import moxy.MvpPresenter
+import javax.inject.Inject
+import javax.inject.Named
 
-class UsersPresenter(
-    private val uiScheduler: Scheduler,
-    private val usersRepo: IGithubUsersRepo,
-    private val router: Router,
-    private val screens: IScreens
-) :
+class UsersPresenter :
     MvpPresenter<UsersView>() {
 
     val usersListPresenter = UsersListPresenter()
+
+    @Inject
+    lateinit var usersRepo: IGithubUsersRepo
+
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var screens: IScreens
+
+    @Named("mainThread")
+    @Inject
+    lateinit var uiScheduler: Scheduler
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
