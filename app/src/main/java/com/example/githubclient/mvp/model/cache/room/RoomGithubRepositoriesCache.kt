@@ -4,7 +4,6 @@ import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepository
 import com.example.githubclient.mvp.model.entity.room.Database
 import com.example.githubclient.mvp.model.entity.room.RoomGithubRepository
-import com.example.githubclient.mvp.model.entity.room.RoomGithubUser
 
 class RoomGithubRepositoriesCache : IGithubRepositoriesCache {
 

@@ -33,12 +33,13 @@ class UsersPresenter :
     @Inject
     lateinit var uiScheduler: Scheduler
 
-    @Inject lateinit var userScopeContainer: IUserScopeContainer
+    @Inject
+    lateinit var userScopeContainer: IUserScopeContainer
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
-        loadData()
+//        loadData()
         usersListPresenter.itemClickListener = { itemView ->
             val gitHubUser: GithubUser = usersListPresenter.users[itemView.pos]
             router.navigateTo(screens.githubUser(gitHubUser))
@@ -64,13 +65,15 @@ class UsersPresenter :
 
     }
 
-    private fun loadData() {
+    fun loadData() {
         usersRepo.getUsers()
             .observeOn(uiScheduler)
             .subscribe({ repos ->
                 usersListPresenter.users.clear()
                 usersListPresenter.users.addAll(repos)
                 viewState.updateList()
+            }, { error ->
+                viewState.showError(error.message.toString())
             })
     }
 

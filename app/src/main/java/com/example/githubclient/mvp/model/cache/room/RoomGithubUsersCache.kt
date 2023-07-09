@@ -5,7 +5,7 @@ import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.room.Database
 import com.example.githubclient.mvp.model.entity.room.RoomGithubUser
 
-class RoomGithubUsersCache: IGithubUsersCache {
+class RoomGithubUsersCache : IGithubUsersCache {
     override fun saveUsersIntoCache(db: Database, githubUsers: List<GithubUser>) {
         val roomUsers = githubUsers.map { user ->
             RoomGithubUser(

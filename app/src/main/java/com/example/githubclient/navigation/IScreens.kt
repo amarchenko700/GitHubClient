@@ -8,4 +8,5 @@ interface IScreens {
     fun users(): Screen
     fun githubUser(githubUser: GithubUser): Screen
     fun githubUserRepo(githubUserRepo: GithubUserRepository): Screen
+    fun settings(): Screen
 }

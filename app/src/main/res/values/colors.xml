@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="icon_main_menu_color">#673AB7</color>
+    <color name="color_active_bottom_navigation_buttons">#673AB7</color>
+    <color name="color_inactive_bottom_navigation_buttons">#BA93FF</color>
 </resources>
