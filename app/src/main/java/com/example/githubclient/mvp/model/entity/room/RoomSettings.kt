@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 @Entity
 data class RoomSettings(
     var sizeList: Int,
-    @PrimaryKey(autoGenerate = true)
+    var sizeRepoList: Int,
+    @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Int = 0
 )

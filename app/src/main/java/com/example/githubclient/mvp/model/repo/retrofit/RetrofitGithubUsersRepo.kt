@@ -17,7 +17,8 @@ class RetrofitGithubUsersRepo(
 
     override fun getUsers() = networkStatus.isOnlineSingle().flatMap { isOnline ->
         if (isOnline) {
-            api.getUsers().flatMap { users ->
+            val perPage = db.settingsDao.getSettings()?.sizeList ?: 30
+            api.getUsers(perPage).flatMap { users ->
                 Single.fromCallable {
                     cache.saveUsersIntoCache(db, users)
                     users

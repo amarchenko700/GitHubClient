@@ -44,7 +44,7 @@ class UserPresenter(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
-        loadData()
+//        loadData()
         userRepoListPresenter.itemClickListener = { itemView ->
             val gitHubUserRepo: GithubUserRepository =
                 userRepoListPresenter.userRepositories[itemView.pos]
@@ -52,7 +52,7 @@ class UserPresenter(
         }
     }
 
-    private fun loadData() {
+    fun loadData() {
         userRepositoriesRepo.getRepositories(githubUser)
             .observeOn(uiScheduler)
             .subscribe({ repos ->

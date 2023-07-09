@@ -28,6 +28,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         }
     }
 
+    fun activateBottomNavigationMenu(selectedItem: Int) {
+        binding.bottomNavigationMenu.menu.findItem(selectedItem)?.isChecked = true
+    }
+
     private val navigator = AppNavigator(this, R.id.container)
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {

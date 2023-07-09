@@ -20,8 +20,9 @@ class RetrofitGithubRepositoriesRepo(
     override fun getRepositories(user: GithubUser) =
         networkStatus.isOnlineSingle().flatMap { isOnline ->
             if (isOnline) {
+                val perPage = db.settingsDao.getSettings()?.sizeRepoList ?: 30
                 user.reposUrl?.let { url ->
-                    api.getUserRepo(user.login).flatMap { repositories ->
+                    api.getUserRepo(user.login, perPage).flatMap { repositories ->
                         Single.fromCallable {
                             cache.saveGithubUsersRepoIntoCache(db, user, repositories)
                             repositories

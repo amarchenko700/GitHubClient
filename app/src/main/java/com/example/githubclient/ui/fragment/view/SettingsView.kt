@@ -6,5 +6,5 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface SettingsView : MvpView {
-    fun saveSettings()
+    fun init()
 }

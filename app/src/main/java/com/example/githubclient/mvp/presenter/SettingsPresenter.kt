@@ -1,6 +1,7 @@
 package com.example.githubclient.mvp.presenter
 
-import com.example.githubclient.navigation.IScreens
+import com.example.githubclient.mvp.model.entity.room.Database
+import com.example.githubclient.mvp.model.entity.room.RoomSettings
 import com.example.githubclient.ui.fragment.view.SettingsView
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
@@ -12,21 +13,26 @@ class SettingsPresenter : MvpPresenter<SettingsView>() {
     lateinit var router: Router
 
     @Inject
-    lateinit var screens: IScreens
+    lateinit var db: Database
 
-//    @Inject
-//    lateinit var settingsRepository: IRepositorySettingsContainer
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.init()
+    }
 
     fun backPressed(): Boolean {
+        router.exit()
         return true
     }
 
-//    override val callbackSaveSettings = {
-//
-//    }
-
-    override fun onDestroy() {
-        //settingsRepository.releaseSettingsScope()
-        super.onDestroy()
+    fun saveSettings(sizeList: Int, sizeRepoList: Int) {
+        db.settingsDao.saveSettings(RoomSettings(sizeList, sizeRepoList))
     }
+
+    fun getSizeUsersList(): Int =
+        db.settingsDao.getSettings()?.sizeList ?: 30
+
+    fun getSizeUsersRepoList(): Int =
+        db.settingsDao.getSettings()?.sizeRepoList ?: 30
+
 }

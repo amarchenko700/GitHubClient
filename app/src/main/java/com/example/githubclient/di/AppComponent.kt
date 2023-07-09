@@ -7,6 +7,7 @@ import com.example.githubclient.di.module.CiceroneModule
 import com.example.githubclient.di.module.ImageLoaderModule
 import com.example.githubclient.di.user.UserSubcomponent
 import com.example.githubclient.mvp.presenter.MainPresenter
+import com.example.githubclient.mvp.presenter.SettingsPresenter
 import com.example.githubclient.ui.activity.MainActivity
 import dagger.Component
 import javax.inject.Singleton
@@ -26,4 +27,5 @@ interface AppComponent {
 
     fun inject(mainActivity: MainActivity)
     fun inject(mainPresenter: MainPresenter)
+    fun inject(settingsPresenter: SettingsPresenter)
 }

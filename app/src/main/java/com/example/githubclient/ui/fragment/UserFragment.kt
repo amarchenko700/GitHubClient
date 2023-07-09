@@ -24,6 +24,11 @@ class UserFragment(private val githubUser: GithubUser) :
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.loadData()
+    }
+
     companion object {
         fun newInstance(githubUser: GithubUser) = UserFragment(githubUser)
     }

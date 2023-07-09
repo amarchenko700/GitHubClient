@@ -5,5 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Settings(
-    val sizeList: Int
+    val sizeList: Int,
+    val sizeRepoList: Int
 ) : Parcelable
