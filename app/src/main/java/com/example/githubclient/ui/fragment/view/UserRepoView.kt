@@ -1,11 +1,10 @@
-package com.example.githubclient.mvp.view
+package com.example.githubclient.ui.fragment.view
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface UserView : MvpView {
+interface UserRepoView : MvpView {
     fun init()
-    fun updateList()
 }
