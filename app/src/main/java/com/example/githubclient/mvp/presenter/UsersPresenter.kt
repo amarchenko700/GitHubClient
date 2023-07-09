@@ -1,5 +1,6 @@
 package com.example.githubclient.mvp.presenter
 
+import com.example.githubclient.di.user.module.IUserScopeContainer
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.repo.IGithubUsersRepo
 import com.example.githubclient.mvp.presenter.list.IUserListPresenter
@@ -32,10 +33,13 @@ class UsersPresenter :
     @Inject
     lateinit var uiScheduler: Scheduler
 
+    @Inject
+    lateinit var userScopeContainer: IUserScopeContainer
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
-        loadData()
+//        loadData()
         usersListPresenter.itemClickListener = { itemView ->
             val gitHubUser: GithubUser = usersListPresenter.users[itemView.pos]
             router.navigateTo(screens.githubUser(gitHubUser))
@@ -61,13 +65,15 @@ class UsersPresenter :
 
     }
 
-    private fun loadData() {
+    fun loadData() {
         usersRepo.getUsers()
             .observeOn(uiScheduler)
             .subscribe({ repos ->
                 usersListPresenter.users.clear()
                 usersListPresenter.users.addAll(repos)
                 viewState.updateList()
+            }, { error ->
+                viewState.showError(error.message.toString())
             })
     }
 
@@ -93,4 +99,8 @@ class UsersPresenter :
         return true
     }
 
+    override fun onDestroy() {
+        userScopeContainer.releaseUserScope()
+        super.onDestroy()
+    }
 }
